@@ -10,7 +10,7 @@
                                 @forelse($articles as $article)
                                 <div class="col-md-6">
                                     <div class="card border hover-shadow-6 mb-6 d-block">
-                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{asset('storage/'.$article->image)}}" alt="Card image cap"></a>
+                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{storage_path().'/images/' . $article->image}}" alt="Card image cap"></a>
                                         <div class="p-6 text-center">
                                             <p>
                                                 <a class=" ls-2 fw-400" href="{{route('show.categories.articles',$article->category->id)}}">
@@ -66,14 +66,14 @@
 
                             <hr>
 
-                            <h6 class="sidebar-title ml-auto">من نحن</h6>
-                            <p class="small-3 ml-auto text-center" style="direction: rtl">
-                                <br><span class="text-warning">مشروع تنفيذ موقع يقدم مقالات واستشارات طبية</span>
-                                <span class="lead-2">قام بتنفيذ المشروع كل من :</span><br>
-                                1. يوسف حسين مسلم<br>
-                                2. أيمن رحيم <br>
-                                3. مصطفى جمعة
-                            </p>
+{{--                            <h6 class="sidebar-title ml-auto">من نحن</h6>--}}
+{{--                            <p class="small-3 ml-auto text-center" style="direction: rtl">--}}
+{{--                                <br><span class="text-warning">مشروع تنفيذ موقع يقدم مقالات واستشارات طبية</span>--}}
+{{--                                <span class="lead-2">قام بتنفيذ المشروع كل من :</span><br>--}}
+{{--                                1. يوسف حسين مسلم<br>--}}
+{{--                                2. أيمن رحيم <br>--}}
+{{--                                3. مصطفى جمعة--}}
+{{--                            </p>--}}
 
                         </div>
                     </div>
