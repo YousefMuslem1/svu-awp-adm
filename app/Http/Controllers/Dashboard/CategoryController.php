@@ -100,10 +100,10 @@ class CategoryController extends Controller
     public function restoreCategory($id)
     {
 //        $category = Category::withTrashed()->where('id', $id)->firstOrFail()->restore();
-        DB::update('update categories set `deleted_at` = ?, `categories`.`updated_at` = ? where `id` = ?', [null,now(),$id]);
+        DB::update('update categories set deleted_at = ?, categories.updated_at = ? where id = ?', [null,now(),$id]);
 
 //        $article = Article::onlyTrashed()->findOrFail($id)->restore();
-        DB::update('update `articles` set `deleted_at` = ?, `articles`.`updated_at` = ? where `category_id` = ?', [null,now(),$id]);
+        DB::update('update articles set deleted_at = ?, articles.updated_at = ? where category_id = ?', [null,now(),$id]);
 
         return back();
     }
