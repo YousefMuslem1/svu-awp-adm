@@ -7,28 +7,28 @@
                 <div class="row">
                     <div class="col-md-8 col-xl-9">
                         <div class="row gap-y">
-                            @if(!empty($articles))
-                                @forelse($articles as $article)
-                                <div class="col-md-6">
-                                    <div class="card border hover-shadow-6 mb-6 d-block">
-                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{asset('storage/'.$article->image)}}" alt="Card image cap"></a>
-                                        <div class="p-6 text-center">
-                                            <p>
-                                                <a class=" ls-2 fw-400" href="{{route('show.categories.articles',$article->category->id)}}">
-                                                    {{$article->category->name}}</a>
-                                            </p>
-                                            <h5 class="mb-0"><a class="text-dark" href="{{route('show.article', $article->id)}}">{{$article->title}}</a></h5>
-                                        </div>
-                                        <div class="card-footer text-center">
-                                            <i class="fa fa-eye"></i> {{ $article->view_count }}
-                                        </div>
-                                    </div>
-                                </div>
-                                @empty
-                                    <strong> {{ request()->query('s')}} </strong>
-                                       لم يتم العثور على نتائج مرتبطة
-                                @endforelse
-                            @endif
+{{--                            @if(!empty($articles))--}}
+{{--                                @forelse($articles as $article)--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="card border hover-shadow-6 mb-6 d-block">--}}
+{{--                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{asset('storage/'.$article->image)}}" alt="Card image cap"></a>--}}
+{{--                                        <div class="p-6 text-center">--}}
+{{--                                            <p>--}}
+{{--                                                <a class=" ls-2 fw-400" href="{{route('show.categories.articles',$article->category->id)}}">--}}
+{{--                                                    {{$article->category->name}}</a>--}}
+{{--                                            </p>--}}
+{{--                                            <h5 class="mb-0"><a class="text-dark" href="{{route('show.article', $article->id)}}">{{$article->title}}</a></h5>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="card-footer text-center">--}}
+{{--                                            <i class="fa fa-eye"></i> {{ $article->view_count }}--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                @empty--}}
+{{--                                    <strong> {{ request()->query('s')}} </strong>--}}
+{{--                                       لم يتم العثور على نتائج مرتبطة--}}
+{{--                                @endforelse--}}
+{{--                            @endif--}}
                         </div>
 
                         {{$articles->appends(['s' => request()->query('s')])->links()}}

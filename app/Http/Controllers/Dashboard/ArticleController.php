@@ -35,7 +35,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = DB::select('select * from `categories` where `categories`.`deleted_at` is null');
+        $categories = DB::select('select * from categories where categories.deleted_at is null');
         return view('dashboard.articles.create')->with('categories', $categories);
     }
 
@@ -55,7 +55,7 @@ class ArticleController extends Controller
 //         $validated['image'] = $request->file('image')->store('articles');
 //        \DB::connection()->enableQueryLog();
 //         Article::create($validated);
-         DB::insert('insert into `articles` (`title`, `description`, `category_id`, `image`, `updated_at`, `created_at`) values (?, ?, ?, ?, ?, ?)',[
+         DB::insert('insert into articles (title, description, category_id, image, updated_at, created_at) values (?, ?, ?, ?, ?, ?)',[
              $request->title, $request->description, $request->category_id, $request->file('image')->store('articles'), now(), now()
          ]);
 //        $queries = \DB::getQueryLog();
@@ -123,7 +123,7 @@ class ArticleController extends Controller
     {
 //        $article = Article::withTrashed()->findOrFail($id);
 
-        $article = DB::select('select * from `articles` where `articles`.`id` = ? limit 1', [$id]);
+        $article = DB::select('select * from articles where articles.id = ? limit 1', [$id]);
 
 //        $article->trashed();
     if(!is_null($article[0]->deleted_at))
@@ -131,14 +131,14 @@ class ArticleController extends Controller
         Storage::delete('public/' . $article[0]->image);
 
 //        $article->forceDelete();
-        DB::delete('delete from `articles` where `id` = ?', [$id]);
+        DB::delete('delete from articles where id = ?', [$id]);
 
         $message = " تم حذف المقالة  بنجاح <b> </b>";
         session()->flash('success', $message );
         return back();
     }
 
-        DB::update('update `articles` set `deleted_at` = ?, `articles`.`updated_at` = ? where `id` = ?',[now(), now(), $id]);
+        DB::update('update articles set deleted_at = ?, articles.updated_at = ? where id = ?',[now(), now(), $id]);
 
 //        $article->delete();
         $message = " تم نقل المقالة  الى سلة المحذوفات <b>  </b>";
@@ -149,13 +149,13 @@ class ArticleController extends Controller
     public function restoreArticle($id)
     {
 //        $article = Article::onlyTrashed()->findOrFail($id);
-        $article = DB::select('select * from `articles` where `articles`.`deleted_at` is not null and `articles`.`id` = ? limit 1', [$id]);
+        $article = DB::select('select * from articles where articles.deleted_at is not null and articles.id = ? limit 1', [$id]);
 //        $category = Category::where('id', $article->category_id)->first();
-        $category = DB::select('select * from `categories` where `id` = ? and `categories`.`deleted_at` is null limit 1', [$article[0]->category_id]);
+        $category = DB::select('select * from categories where id = ? and categories.deleted_at is null limit 1', [$article[0]->category_id]);
 
         if($category) {
 //            $article->restore();
-            DB::update('update `articles` set `deleted_at` = ?, `articles`.`updated_at` = ? where `id` = ?', [
+            DB::update('update articles set deleted_at = ?, articles.updated_at = ? where id = ?', [
                 null, now(), $id
             ]);
             session()->flash('success',  'تم استعادة المقالة' . $article[0]->title);
