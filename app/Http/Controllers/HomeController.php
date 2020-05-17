@@ -36,7 +36,7 @@ class HomeController extends Controller
 //        Category::all();
         return view('home', [
                     'articles' =>  $articles,
-                    'categories' => DB::select('select * from `categories` where `categories`.`deleted_at` is null'),
+                    'categories' => DB::select('select * from categories where categories.deleted_at is null'),
                     'topArticles' => Article::orderBy('view_count', 'desc')->take(5)->get()
                     ]);
     }
@@ -49,13 +49,13 @@ class HomeController extends Controller
             $request->session()->put('article_'.$article->id, 'article_'.$article->id);
             $this->isNewVisitor($article);
         }
-        $categories = DB::select('select * from `categories` where `categories`.`deleted_at` is null');
+        $categories = DB::select('select * from categories where categories.deleted_at is null');
         return view('articles.get_article', ['article' => $article])->with('categories', $categories);
     }
 
     public function getCategoriesArticles(Category $category)
     {
-        $categories = DB::select('select * from `categories` where `categories`.`deleted_at` is null');
+        $categories = DB::select('select * from categories where categories.deleted_at is null');
         return view('categories.get_categories_articles')
                 ->with( 'articles' , $category->articles()->simplePaginate(8))
                 ->with('categories', $categories);
