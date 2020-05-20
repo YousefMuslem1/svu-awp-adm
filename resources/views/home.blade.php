@@ -10,7 +10,7 @@
                                 @forelse($articles as $article)
                                 <div class="col-md-6">
                                     <div class="card border hover-shadow-6 mb-6 d-block">
-                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{asset('storage/'.$article->image)}}" alt="Card image cap"></a>
+                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{secure_asset('storage/'.$article->image)}}" alt="Card image cap"></a>
                                         <div class="p-6 text-center">
                                             <p>
                                                 <a class=" ls-2 fw-400" href="{{route('show.categories.articles',$article->category->id)}}">
