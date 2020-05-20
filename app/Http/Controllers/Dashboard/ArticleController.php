@@ -138,7 +138,7 @@ class ArticleController extends Controller
         return back();
     }
 
-        DB::update('update articles set deleted_at = ?, articles.updated_at = ? where id = ?',[now(), now(), $id]);
+        DB::update('update articles set articles.deleted_at = ?, articles.updated_at = ? where id = ?',[now(), now(), $id]);
 
 //        $article->delete();
         $message = " تم نقل المقالة  الى سلة المحذوفات <b>  </b>";
