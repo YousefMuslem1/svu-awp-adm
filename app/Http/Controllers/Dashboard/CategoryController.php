@@ -85,14 +85,14 @@ class CategoryController extends Controller
         if($category->trashed())
         {
 //            $category->articles()->forceDelete();
-            DB::delete('delete from articles where articles.category_id = ? and articles.category_id is not null', [$id]);
+            DB::delete('delete from articles where category_id = ? and category_id is not null', [$id]);
             DB::delete('delete from categories where id=?', [$id]);
             session()->flash('success', 'تم حذف القسم ' . $category->name );
             return back();
         }
 //        $category->articles()->delete();
-        DB::update('update articles set deleted_at = ?, articles.updated_at = ? where articles.category_id = ? and articles.category_id is not null and articles.deleted_at is null',[now(), now(), $id]);
-        DB::update('update categories set deleted_at = ?, categories.updated_at = ? where id = ?',[now(), now(), $id]);
+        DB::update('update articles set deleted_at = ?, updated_at = ? where category_id = ? and category_id is not null and deleted_at is null',[now(), now(), $id]);
+        DB::update('update categories set deleted_at = ?, updated_at = ? where id = ?',[now(), now(), $id]);
         session()->flash('success', 'تم حذف القسم ' . $category->name );
         return back();
     }
@@ -100,10 +100,10 @@ class CategoryController extends Controller
     public function restoreCategory($id)
     {
 //        $category = Category::withTrashed()->where('id', $id)->firstOrFail()->restore();
-        DB::update('update categories set deleted_at = ?, categories.updated_at = ? where id = ?', [null,now(),$id]);
+        DB::update('update categories set deleted_at = ?, updated_at = ? where id = ?', [null,now(),$id]);
 
 //        $article = Article::onlyTrashed()->findOrFail($id)->restore();
-        DB::update('update articles set deleted_at = ?, articles.updated_at = ? where category_id = ?', [null,now(),$id]);
+        DB::update('update articles set deleted_at = ?, updated_at = ? where category_id = ?', [null,now(),$id]);
 
         return back();
     }
