@@ -41,7 +41,7 @@
                     <input type="file" class="form-control-file" id="image" name="image">
                 </div>
                 @error('image') <div class="alert alert-danger">{{$message}}</div> @enderror
-                <img src="{{asset('/storage/'.$article->image)}}" alt="{{$article->name}}" width="100%" height="400px">
+                <img src="{{asset('/images/'.$article->image)}}" alt="{{$article->name}}" width="100%" height="400px">
                 <hr>
                 <button type="submit" class="btn btn-success mt-3" style="cursor: pointer">تعديل المقالة</button>
             </form>
