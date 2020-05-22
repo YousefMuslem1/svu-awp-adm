@@ -12,7 +12,7 @@
             {{date('F d, Y', strtotime($article->created_at))}} at {{date('g:ia')}}
             </span><br>
             القسم :<span class="text-secondary">  {{$article->category->name}} </span>
-            <img src="{{asset('/storage/'.$article->image)}}" alt="{{$article->name}}" class="img-thumbnail my-4">
+            <img src="{{asset('/images/'.$article->image)}}" alt="{{$article->name}}" class="img-thumbnail my-4">
             <p>{!! $article->description !!}</p>
         </div>
     </div>

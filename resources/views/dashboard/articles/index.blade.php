@@ -44,7 +44,7 @@
                         </td>
                         <td class="category">{{ $article->category->name }}</td>
                         <td>
-                            <img src="{{asset('/storage/'.$article->image)}}" alt="{{$article->name}}" width="90px" height="70px">
+                            <img src="{{asset('/images/'.$article->image)}}" alt="{{$article->name}}" width="90px" height="70px">
                         </td>
                         <td>
                             <button
