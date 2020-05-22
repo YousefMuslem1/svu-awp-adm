@@ -58,7 +58,7 @@
                             <h6 class="sidebar-title ml-auto">الأكثر مشاهدة</h6>
                             @for($i = 0; $i < 5; $i++)
                                 <a class="media text-default align-items-center mb-5" href="{{route('show.article', $topArticles[$i]->id)}}">
-                                    <img class="rounded w-65px mr-4" src="{{asset('storage/'.$topArticles[$i]->image)}}">
+                                    <img class="rounded w-65px mr-4" src="{{asset('images/'.$topArticles[$i]->image)}}">
                                     <p class="media-body small-2 lh-4 mb-0">{{$topArticles[$i]->title}}</p>
                                 </a>
                             @endfor

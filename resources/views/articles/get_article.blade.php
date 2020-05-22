@@ -11,7 +11,7 @@
 
 
             <div class="text-center my-8">
-                <img class="rounded-md" src="{{secure_asset('storage/' . $article->image)}}" alt="...">
+                <img class="rounded-md" src="{{secure_asset('images/' . $article->image)}}" alt="...">
             </div>
 
 
