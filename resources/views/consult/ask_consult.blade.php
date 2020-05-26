@@ -62,6 +62,17 @@
                                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                             </div>
                             @error('consult_body') <div class="alert alert-danger">{{$message}}</div> @enderror
+
+                            <div class="form-group">
+                                <label for="captcha" class="lead">لست بوت</label><br>
+                                <img src="{{captcha_src()}}"  alt="captcha" class="mb-2">
+                                <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" placeholder="قم بإدخال ماتراه في الصورة أعلاه" required  autocomplete="off">
+                                @error('captcha')
+                                <span class="invalid-feedback">
+                                    خطأ يرجى إعادة المحاولة
+                                </span>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-success " style="width: 9rem">إرسال</button>
                         </form>
                     </div>

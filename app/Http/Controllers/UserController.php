@@ -24,7 +24,8 @@ class UserController extends Controller
             'gender' => 'required',
             'dis_history' => 'required|min:15',
             'consult_body' => 'required|min:15',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'captcha' => 'required|captcha'
         ])->validate();
         DB::insert('insert into consultations (consult_add, age, gender, dis_history, consult_body, user_id, updated_at, created_at) values (?, ?, ?, ?, ?, ?, ?, ?)',
                         [$request->consult_add, $request->age, $request->gender, $request->dis_history, $request->consult_body, auth()->user()->id, now(), now()]);
