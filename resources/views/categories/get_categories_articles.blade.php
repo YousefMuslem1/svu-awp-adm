@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <a href="blog-single.html">
-                                    <img class="fit-cover position-absolute h-100" src="{{asset('images/'.$article->image)}}" alt="...">
+                                    <img class="fit-cover position-absolute h-100" src="{{asset($article->image)}}" alt="...">
                                 </a>
                             </div>
 

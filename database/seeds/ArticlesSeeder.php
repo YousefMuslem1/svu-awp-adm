@@ -158,7 +158,7 @@ class ArticlesSeeder extends Seeder
 
 
         ];
-        $images = ['articles/1.jpg', 'articles/2.jpg', 'articles/3.jpg', 'articles/4.jpg', 'articles/5.jpg', 'articles/6.jpg', 'articles/7.jpg', 'articles/8.jpg','articles/9.jpg','articles/10.jpg'];
+        $images = ['images/articles/1.jpg', 'images/articles/2.jpg', 'images/articles/3.jpg', 'images/articles/4.jpg', 'images/articles/5.jpg', 'images/articles/6.jpg', 'images/articles/7.jpg', 'images/articles/8.jpg','images/articles/9.jpg','images/articles/10.jpg'];
 
         for($i = 0; $i < count($category); $i++)
         {

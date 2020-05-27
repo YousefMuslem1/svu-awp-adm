@@ -11,6 +11,8 @@
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
     <!-- Styles -->
     @if(!Request::is(['login', 'register', 'inbox*',]))
         <link href="{{asset('/css/client/page.min.css')}}" rel="stylesheet">
@@ -78,6 +80,7 @@
             </footer><!-- /.footer -->
             @show
             <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-        @yield('scripts')
+
+            @yield('scripts')
 </body>
 </html>

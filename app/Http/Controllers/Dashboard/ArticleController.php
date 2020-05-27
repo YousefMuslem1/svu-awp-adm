@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,8 +41,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-
+     * Store a newly created resource in DB.
      */
     public function store(Request $request)
     {
@@ -52,21 +52,18 @@ class ArticleController extends Controller
             'image' => 'required|image|mimes:jpeg,jpg,png,gif|max:2048'
         ])->validate();
 
-//         $validated['image'] = $request->file('image')->store('articles');
-//        \DB::connection()->enableQueryLog();
-//         Article::create($validated);
+        $imageName = time(). '.' . $request->image->extension();
+
          DB::insert('insert into articles (title, description, category_id, image, updated_at, created_at) values (?, ?, ?, ?, ?, ?)',[
-             $request->title, $request->description, $request->category_id, $request->file('image')->store('articles'), now(), now()
+             $request->title, $request->description, $request->category_id, $request->image->move('images/articles' , $imageName), now(), now()
          ]);
-//        $queries = \DB::getQueryLog();
-//        return dd($queries);
+
          session()->flash('success', 'تم إضافة مقالة جديدة بعنوان ' . $validated['title']);
          return redirect(route('dashboard.articles.index'));
     }
 
     /**
      * Display the specified resource.
-
      */
     public function show(Request $request,Article $article)
     {
@@ -106,8 +103,9 @@ class ArticleController extends Controller
         $article->category_id = $request->category_id;
         if(!is_null($request->file('image')))
         {
-            Storage::delete($article->image);
-            $article->image = $request->file('image')->store('articles', 'public');
+            File::delete($article->image);
+            $imageName = time(). '.' . $request->image->extension();
+            $article->image = $request->image->move('images/articles' , $imageName);
         }
         $article->save();
         session()->flash('success', 'تم تعديل المقالة '. $article->title);
@@ -128,9 +126,10 @@ class ArticleController extends Controller
 //        $article->trashed();
     if(!is_null($article[0]->deleted_at))
     {
-        Storage::delete('public/' . $article[0]->image);
+//        Storage::delete('public/' . $article[0]->image);
 
 //        $article->forceDelete();
+        File::delete($article[0]->image);
         DB::delete('delete from articles where id = ?', [$id]);
 
         $message = " تم حذف المقالة  بنجاح <b> </b>";

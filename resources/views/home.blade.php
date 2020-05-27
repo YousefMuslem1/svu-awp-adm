@@ -10,7 +10,7 @@
                                 @forelse($articles as $article)
                                 <div class="col-md-6">
                                     <div class="card border hover-shadow-6 mb-6 d-block">
-                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{asset('images/'.$article->image)}}" alt="Card image cap"></a>
+                                        <a href="{{route('show.article', $article->id)}}"><img class="card-img-top" src="{{asset($article->image)}}" alt="Card image cap"></a>
                                         <div class="p-6 text-center">
                                             <p>
                                                 <a class=" ls-2 fw-400" href="{{route('show.categories.articles',$article->category->id)}}">
@@ -58,7 +58,7 @@
                             <h6 class="sidebar-title ml-auto">الأكثر مشاهدة</h6>
                             @for($i = 0; $i < 5; $i++)
                                 <a class="media text-default align-items-center mb-5" href="{{route('show.article', $topArticles[$i]->id)}}">
-                                    <img class="rounded w-65px mr-4" src="{{asset('images/'.$topArticles[$i]->image)}}">
+                                    <img class="rounded w-65px mr-4" src="{{asset($topArticles[$i]->image)}}">
                                     <p class="media-body small-2 lh-4 mb-0">{{$topArticles[$i]->title}}</p>
                                 </a>
                             @endfor

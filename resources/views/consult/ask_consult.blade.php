@@ -65,7 +65,8 @@
 
                             <div class="form-group">
                                 <label for="captcha" class="lead">لست بوت</label><br>
-                                <img src="{{captcha_src()}}"  alt="captcha" class="mb-2">
+                                <img src="{{ captcha_src() }}" alt="captcha" class="captcha-img" data-refresh-config="default">
+                                <span id="captcha-fresh" style="cursor: pointer"><i class="fas fa-sync"></i></span>
                                 <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" placeholder="قم بإدخال ماتراه في الصورة أعلاه" required  autocomplete="off">
                                 @error('captcha')
                                 <span class="invalid-feedback">
@@ -86,8 +87,25 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <script src="{{asset('js/trix.min.js')}}"> </script>
+    <script>
+
+        $(document).ready(function (e) {
+            $('#captcha-fresh').on('click', function () {
+                var captcha = $('img.captcha-img');
+                var config = captcha.data('refresh-config');
+                $.ajax({
+                    method: 'GET',
+                    url: '/get_captcha/' + config,
+                }).done(function (response) {
+                    captcha.prop('src', response);
+                });
+            });
+        })
+
+    </script>
 </body>
 </html>

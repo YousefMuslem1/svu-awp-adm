@@ -24,3 +24,6 @@ Route::get('consultation', 'HomeController@askConsult')->name('ask.consult');
 Route::post('consultation', 'UserController@saveConsult')->name('save.consult');
 Route::get('inbox', 'UserController@inbox')->name('inbox');
 Route::get('inbox/{consult}', 'UserController@getMessage')->name('inbox.message');
+Route::get('/get_captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
+    return $captcha->src($config);
+});
